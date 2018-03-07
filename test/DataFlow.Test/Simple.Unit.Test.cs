@@ -18,8 +18,8 @@ namespace SimpleUnitTest
 
             // Start the producer and consumer.
             var values = Enumerable.Range(0, 10);
-            BothWays.Produce(queue, values);
-            var consumer = BothWays.Consume(queue);
+            TplDataFlow.Produce(queue, values);
+            var consumer = TplDataFlow.Consume(queue);
 
             // Wait for everything to complete.
             await Task.WhenAll(consumer, queue.Completion);
