@@ -25,19 +25,18 @@ namespace DataFlowConsole
         {
             var bq = new CustomBlockingQueue<int>(10);
 
-            Task producer = new Task(() =>
+            Task producer = Task.Run(() =>
             {
                 for(var i = 0; ; i++)
                 {
                     if (!bq.Enqueue(i))
                         break;
-                    Console.WriteLine($"{i} >>");
+                    Console.WriteLine($"Producer enqueuing {i} ");
                 }
                 Console.WriteLine("Producer has completed......");
             });
-            producer.Start();
 
-            Task consumer = new Task(() =>
+            Task consumerZero = Task.Run(() =>
             {
                     for (; ;)
                     {
@@ -45,13 +44,12 @@ namespace DataFlowConsole
                         int x = 0;
                         if ( !bq.Dequeue( out x ) )
                             break;
-                        Console.WriteLine($"{0} < {x}");
+                        Console.WriteLine($"{0} dequeued {x}");
                     }
                     Console.WriteLine($"Consumer {0} has completed......");
             });
-            consumer.Start();
 
-            Task consumerTwo = new Task(() =>
+            Task consumerOne = Task.Run(() =>
             {
                 for (; ;)
                 {
@@ -59,14 +57,13 @@ namespace DataFlowConsole
                     int x = 0;
                     if ( !bq.Dequeue( out x ) )
                         break;
-                    Console.WriteLine($"{1} < {x}");
+                    Console.WriteLine($"{1} dequeued {x}");
                 }
                 Console.WriteLine($"Consumer {1} has completed......");
             });
-            consumerTwo.Start();
 
 
-            Task consumerThree = new Task(() =>
+            Task consumerTwo = Task.Run(() =>
             {
                 for (; ;)
                 {
@@ -74,11 +71,23 @@ namespace DataFlowConsole
                     int x = 0;
                     if ( !bq.Dequeue( out x ) )
                         break;
-                    Console.WriteLine($"{2} < {x}");
+                    Console.WriteLine($"{2} dequeued {x}");
                 }
                 Console.WriteLine($"Consumer {2} has completed......");
             });
-            consumerThree.Start();
+
+            Task consumerThree = Task.Run(() =>
+            {
+                    for (; ;)
+                    {
+                        Thread.Sleep(100);
+                        int x = 0;
+                        if ( !bq.Dequeue( out x ) )
+                            break;
+                        Console.WriteLine($"{3} dequeued {x}");
+                    }
+                    Console.WriteLine($"Consumer {3} has completed......");
+            });
 
             Thread.Sleep( 1000 );
 
