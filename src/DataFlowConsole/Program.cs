@@ -13,7 +13,7 @@ namespace DataFlowConsole
                 _quitEvent.Set();
                 eArgs.Cancel = true;
             };
-
+            Console.WriteLine("Type Ctrl-C to quit ....");
             CustomBlockQueue();
 
             _quitEvent.WaitOne();
