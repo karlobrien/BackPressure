@@ -5,6 +5,9 @@ using System.Threading;
 
 namespace DataFlowConsole
 {
+    /// <summary>
+    /// Blocking Queue implemented with monitor.wait and monitor.pulseall
+    /// </summary>
     public class CustomBlockingQueue<TIn>
     {
         private readonly object _objForLock = new Object();

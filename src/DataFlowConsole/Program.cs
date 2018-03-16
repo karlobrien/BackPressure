@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +15,14 @@ namespace DataFlowConsole
                 eArgs.Cancel = true;
             };
             Console.WriteLine("Type Ctrl-C to quit ....");
-            CustomBlockQueue();
+
+            Publisher pub = new Publisher();
+            var dis = pub.GetMarketDataObs("")
+                .Subscribe(s => {
+                    Console.WriteLine(s);
+                });
+
+            //CustomBlockQueue();
 
             _quitEvent.WaitOne();
 
