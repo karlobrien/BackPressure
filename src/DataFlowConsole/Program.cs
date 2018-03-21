@@ -2,6 +2,7 @@
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace DataFlowConsole
 {
@@ -16,11 +17,20 @@ namespace DataFlowConsole
             };
             Console.WriteLine("Type Ctrl-C to quit ....");
 
-            Publisher pub = new Publisher();
-            var dis = pub.GetMarketDataObs("")
-                .Subscribe(s => {
-                    Console.WriteLine(s);
-                });
+            ILogger log = new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.File("log.txt")
+                .CreateLogger();
+
+            var dc = new DataCapture(new Publisher(), log);
+
+            var t = Task.Run(() =>
+            {
+                foreach(var item in dc.PriceQueue.GetConsumingEnumerable())
+                {
+                    Console.WriteLine(item);
+                }
+            });
 
             //CustomBlockQueue();
 

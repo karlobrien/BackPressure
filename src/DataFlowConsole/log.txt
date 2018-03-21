@@ -1,0 +1,9 @@
+2018-03-18 14:29:15.943 +00:00 [INF] Hello, Serilog!
+2018-03-20 06:25:14.927 +00:00 [INF] Hello, Serilog!
+2018-03-20 16:33:31.865 +00:00 [INF] Hello, Serilog!
+2018-03-20 16:34:59.402 +00:00 [INF] Hello, Serilog!
+2018-03-20 16:36:14.608 +00:00 [INF] Hello, Serilog!
+2018-03-20 16:37:27.350 +00:00 [INF] Hello, Serilog!
+2018-03-20 16:38:58.384 +00:00 [INF] Hello, Serilog!
+2018-03-20 16:39:44.086 +00:00 [INF] Hello, Serilog!
+2018-03-21 13:30:11.373 +00:00 [INF] Hello, Serilog!
