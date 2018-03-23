@@ -32,6 +32,22 @@ namespace DataFlowConsole
                 }
             });
 
+
+            using(var d = new DataCapture(new Publisher(), log))
+            {
+                //Maybe add each consumer thread here - then handle in the dispose
+
+
+
+                var te = Task.Run(() =>
+                {
+                    foreach(var item in dc.PriceQueue.GetConsumingEnumerable())
+                    {
+                        Console.WriteLine(item);
+                    }
+                });
+            }
+
             //CustomBlockQueue();
 
             _quitEvent.WaitOne();
