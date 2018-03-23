@@ -41,7 +41,6 @@ namespace DataFlowConsole
             PriceQueue.CompleteAdding();
         }
 
-        public void AddConsumer()
         public void Dispose()
         {
             _pubDispose.Dispose();
